@@ -5,6 +5,7 @@ using UnityEngine;
 
 public class Behavior : MonoBehaviour
 {
+    public List<float> listOfFloats = new List<float>();
     class ExampleClass
     {
         public class Coords
@@ -73,10 +74,46 @@ public class Behavior : MonoBehaviour
         y = AddToX(x);
         b = x < (y + 1);
 
+        for (int i = 0; i < 10; i++)
+        {
+            Debug.Log(x);
+        }
+
+        y = 0;
+        while (x < 10)
+        {
+            listOfFloats.Add(y);
+            listOfFloats.Add(y);
+            listOfFloats.Add(y);
+            y += 3;
+            if (y > 5)
+            {
+                break;
+            }
+        }
+
+        for (int i = 0; i < listOfFloats.Count; i++)
+        {
+            if (i == 4)
+            {
+                continue;
+            }
+            Debug.Log($"for loop, list {i}th element = {listOfFloats[i]}");
+        }
+
+        //foreach (float f in listOfFloats)
+        //{
+        //    Debug.Log($"foreach loop, element= {f}");
+        //}
+
+        if (SomeFunc())
+        {
+
+        }
         //int v = AddToX(5);
         //int xx = AddToX(c);
         //TestFunc(6);
-        Debug.Log(x);
+
 
         //for (float i = 0; i <= 1.0f; i += 0.1f) //i++ => i = i + 1;, i-- => i = i - 1; i +-*/= x => i = i +-*/ x
         //{
@@ -92,7 +129,7 @@ public class Behavior : MonoBehaviour
         // }
 
         //Debug.Log(EvaluateAtPoint(x, Function));
-        //Debug.Log(NumericalIntegration(1, 5, 1000, Function));
+        Debug.Log(NumericalIntegration(0, 5, 1000, Fin));
     }
 
 
@@ -100,39 +137,47 @@ public class Behavior : MonoBehaviour
     //{
     //    return function(x);
     //}
-    //private float Function(float x)
-    //{
-    //    return Mathf.Sin(x) * Mathf.Cos(x);
-    //}
+    private float Function(float x)
+    {
+        return x * x + x;
+    }
 
-    ///// <summary>
-    ///// Integrates function over [start, end] using Simpson's 3/8 rule.
-    ///// </summary>
-    ///// <param name="start">Start of integration</param>
-    ///// <param name="end">End of integration</param>
-    ///// <param name="function">The function to be integrated</param>
-    ///// <returns></returns>
-    //private double NumericalIntegration(float start, float end, int steps, Func<float, float> function)
-    //{
-    //    float sum = 0;
-    //    int simpsonCoeff;
+    float Fin(float d)
+    {
+        return d + 2;
+    }
+    /// <summary>
+    /// Integrates function over [start, end] using Simpson's 3/8 rule.
+    /// </summary>
+    /// <param name="start">Start of integration</param>
+    /// <param name="end">End of integration</param>
+    /// <param name="function">The function to be integrated</param>
+    /// <returns></returns>
+    private double NumericalIntegration(float start, float end, int steps, Func<float, float> function)
+    {
+        float sum = 0;
+        int simpsonCoeff;
 
-    //    for (int i = 0; i <= steps; i++)
-    //    {
-    //        if (i == 0 || i == steps)
-    //            simpsonCoeff = 1;
-    //        else
-    //        {
-    //            if (i % 2 == 0)
-    //                simpsonCoeff = 4;
-    //            else
-    //                simpsonCoeff = 2;
-    //        }
-    //        sum += simpsonCoeff * (function(start + i * (end - start) / steps));
-    //    }
-    //    sum *= (end - start) / (3 * steps);
+        for (int i = 0; i <= steps; i++)
+        {
+            if (i == 0 || i == steps)
+                simpsonCoeff = 1;
+            else
+            {
+                if (i % 2 == 0)
+                    simpsonCoeff = 4;
+                else
+                    simpsonCoeff = 2;
+            }
+            sum += simpsonCoeff * (function(start + i * (end - start) / steps));
+        }
+        sum *= (end - start) / (3 * steps);
 
-    //    return sum;
+        return sum;
+    }
 
-    //}
+
+    bool SomeFunc() {
+        return false;
+    }
 }

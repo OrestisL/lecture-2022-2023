@@ -32,6 +32,11 @@ public class Box : BaseBehaviour
         Debug.Log(count);
         blueSphereInstance = Instantiate(blueSpherePrefab);
         s = "ajsdfgasd";
+
+        CameraClick.OnClickedOnItem.AddListener(() => Function(4, 3));
+        CameraClick.OnFunc += (x) => Square(x);
+        CameraClick.OnFunc += (x) => Cube(x);
+        CameraClick.OnFunc += (x) => SquareRoot(x);
     }
 
     public override void OnUpdate()
@@ -42,6 +47,36 @@ public class Box : BaseBehaviour
     private void OnDestroy()
     {
         BehaviourDestroyed();
+    }
+
+    void Function(float x, float y)
+    {
+        Debug.Log(x + y);
+    }
+
+    float Square(float x)
+    {
+        float y = x * x;
+        Debug.Log(y);
+        return y;
+    }
+    float Cube(float x)
+    {
+        float y = x * x * x;
+        Debug.Log(y);
+        return y;
+    }
+
+    float SquareRoot(float x)
+    {
+        if (x < 0)
+        {
+            Debug.Log("Input for sqrt was < 0");
+            return 0;
+        }
+        float y = Mathf.Sqrt(x);
+        Debug.Log(y);
+        return y;
     }
 
 }
