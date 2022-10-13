@@ -60,3 +60,6 @@ crashlytics-build.properties
 
 #Homeworks folder
 Assets/Homeworks
+
+#student work
+Assets/StudentWork
