@@ -129,7 +129,7 @@ public class Behavior : MonoBehaviour
         // }
 
         //Debug.Log(EvaluateAtPoint(x, Function));
-        Debug.Log(NumericalIntegration(0, 5, 1000, Fin));
+        Debug.Log(NumericalIntegration(1, 5, SomeMathFunction));
     }
 
 
@@ -137,9 +137,9 @@ public class Behavior : MonoBehaviour
     //{
     //    return function(x);
     //}
-    private float Function(float x)
+    private double SomeMathFunction(double x)
     {
-        return x * x + x;
+        return Math.Exp(x) * 1 / x;
     }
 
     float Fin(float d)
@@ -153,10 +153,11 @@ public class Behavior : MonoBehaviour
     /// <param name="end">End of integration</param>
     /// <param name="function">The function to be integrated</param>
     /// <returns></returns>
-    private double NumericalIntegration(float start, float end, int steps, Func<float, float> function)
+    private double NumericalIntegration(float start, float end, Func<double, double> function)
     {
-        float sum = 0;
+        double sum = 0;
         int simpsonCoeff;
+        int steps = (int)((end - start) * 100);
 
         for (int i = 0; i <= steps; i++)
         {
@@ -165,9 +166,9 @@ public class Behavior : MonoBehaviour
             else
             {
                 if (i % 2 == 0)
-                    simpsonCoeff = 4;
-                else
                     simpsonCoeff = 2;
+                else
+                    simpsonCoeff = 4;
             }
             sum += simpsonCoeff * (function(start + i * (end - start) / steps));
         }
@@ -177,7 +178,8 @@ public class Behavior : MonoBehaviour
     }
 
 
-    bool SomeFunc() {
+    bool SomeFunc()
+    {
         return false;
     }
 }

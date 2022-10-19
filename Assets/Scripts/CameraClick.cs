@@ -11,6 +11,8 @@ public class CameraClick : MonoBehaviour
     public static UnityEvent OnClickedOnItem = new UnityEvent();
     public static Action OnActionComplete;
     public static Func<float, float> OnFunc;
+    public AudioSource audioSource;
+    public AudioClip clickClip;
 
     void Start()
     {
@@ -32,6 +34,8 @@ public class CameraClick : MonoBehaviour
             {
                 Debug.Log(hitInfo.transform.name);
                 OnClickedOnItem?.Invoke();
+
+                audioSource.PlayOneShot(clickClip);
 
                 Ray secondRay = new Ray(hitInfo.transform.position, Vector3.down);
                 if (Physics.Raycast(secondRay, out RaycastHit hitInfo2))
