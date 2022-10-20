@@ -97,7 +97,7 @@ LightmapSettings:
     m_ExportTrainingData: 0
     m_TrainingDataDestination: TrainingData
     m_LightProbeSampleCountMultiplier: 4
-  m_LightingDataAsset: {fileID: 0}
+  m_LightingDataAsset: {fileID: 112000000, guid: 30e64db85b24ed545b768fc5c84cf1a0, type: 2}
   m_LightingSettings: {fileID: 4890085278179872738, guid: 0eccd595e7fe6ef4c84dacf3f45f8ba4, type: 2}
 --- !u!196 &4
 NavMeshSettings:
@@ -3236,7 +3236,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh-64628
+  m_Name: pb_Mesh23860
   serializedVersion: 10
   m_SubMeshes:
   - serializedVersion: 2
@@ -3428,7 +3428,7 @@ CharacterController:
   m_Height: 2
   m_Radius: 0.5
   m_SlopeLimit: 45
-  m_StepOffset: 0.3
+  m_StepOffset: 0.5
   m_SkinWidth: 0.08
   m_MinMoveDistance: 0.001
   m_Center: {x: 0, y: 0, z: 0}
@@ -3518,6 +3518,9 @@ MonoBehaviour:
   movementDeadzone: 0.1
   maxAngle: 60
   gravity: 9.81
+  walkJumpHeight: 5
+  runJumpHeight: 8
+  verticalVelocity: 0
   invertCameraStatus: -1
 --- !u!1 &1108395156
 GameObject:
@@ -3815,7 +3818,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh-67286
+  m_Name: pb_Mesh23892
   serializedVersion: 10
   m_SubMeshes:
   - serializedVersion: 2
@@ -3984,6 +3987,7 @@ GameObject:
   - component: {fileID: 1516284837}
   - component: {fileID: 1516284836}
   - component: {fileID: 1516284835}
+  - component: {fileID: 1516284838}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -4057,6 +4061,19 @@ Transform:
   m_Father: {fileID: 1071171824}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1516284838
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1516284834}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: aed4f708ef5b0fc49bfbad67275757bd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  visibilityKey: 308
 --- !u!1 &1621544917
 GameObject:
   m_ObjectHideFlags: 0
@@ -4157,7 +4174,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh-65884
+  m_Name: pb_Mesh23832
   serializedVersion: 10
   m_SubMeshes:
   - serializedVersion: 2
@@ -4615,7 +4632,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2128152594}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 11.439407, y: 0.0001001358, z: 14.656576}
+  m_LocalPosition: {x: 11.439407, y: 6, z: -1.7}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []

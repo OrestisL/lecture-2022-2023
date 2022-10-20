@@ -6,12 +6,12 @@ public class BaseBehaviourHandler : MonoBehaviour
 {
     public static List<BaseBehaviour> baseBehaviourList = new List<BaseBehaviour>();
 
-    public static void AddToList(BaseBehaviour baseBeh)
+    public static void AddToList<T>(T baseBeh) where T : BaseBehaviour
     {
         baseBehaviourList.Add(baseBeh);
     }
 
-    public static void RemoveFromList(BaseBehaviour baseBeh)
+    public static void RemoveFromList<T>(T baseBeh) where T : BaseBehaviour
     {
         if (baseBehaviourList.Contains(baseBeh))
             baseBehaviourList.Remove(baseBeh);
