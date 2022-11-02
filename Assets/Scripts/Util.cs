@@ -5,10 +5,11 @@ using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 using System.IO;
 using System.Linq;
+using System;
 
 public class Util
 {
-    [System.Serializable]
+    [Serializable]
     public class Highscore
     {
         public string name;
@@ -21,7 +22,7 @@ public class Util
         }
     }
 
-    [System.Serializable]
+    [Serializable]
     public class HighscoreArray
     {
         public List<Highscore> highscoreList = new List<Highscore>();
@@ -32,6 +33,19 @@ public class Util
         }
     }
 
+    [Serializable]
+    public class AudioSettings 
+    {
+        public float bgVolume;
+        public float sfxVolume;
+
+        public static AudioSettings defaultSettings = new AudioSettings(1, 1);
+        public AudioSettings(float bg, float sfx)
+        {
+            bgVolume = bg;
+            sfxVolume = sfx;
+        }
+    }
 
     public static List<Highscore> LoadHighscores()
     {
@@ -59,8 +73,7 @@ public class Util
         }
 
         //sort list descending with score
-        hsa.highscoreList = hsa.highscoreList.OrderByDescending(x => x.score)
-            .GroupBy(x => x.name).Select(x => x.FirstOrDefault()).ToList();
+        hsa.highscoreList = SortListTDescendingDistinct(hsa.highscoreList);
 
         return hsa.highscoreList;
     }
@@ -82,9 +95,11 @@ public class Util
 
         list.Add(new Highscore(name, score));
 
+        list = SortListTDescendingDistinct(list);
+
         HighscoreArray hsa = new HighscoreArray(list);
 
-        string json = JsonUtility.ToJson(hsa);
+        string json = JsonUtility.ToJson(hsa, true);
 
         using (StreamWriter sw = new StreamWriter(path))
         {
@@ -93,6 +108,48 @@ public class Util
 
     }
 
+    private static List<Highscore> SortListTDescendingDistinct(List<Highscore> list)
+    {
+        return list.OrderByDescending(x => x.score)
+            .GroupBy(x => x.name).Select(x => x.FirstOrDefault()).ToList(); 
+    }
+
+    public static void SaveSoundSettings(AudioSettings AS)   
+    {
+        string path = Path.Combine(Application.persistentDataPath, "AudioSettings.json");
+        //check if file exists
+        if (!File.Exists(path))
+        {
+            File.Create(path).Close();
+        }
+
+        string json = "";
+        json = JsonUtility.ToJson(AS, true);
+
+        using (StreamWriter sw = new StreamWriter(path))
+        {
+            sw.Write(json);
+        }
+    }
+
+    public static AudioSettings LoadSoundSettings() 
+    {
+        string path = Path.Combine(Application.persistentDataPath, "AudioSettings.json");
+        //check if file exists
+        if (!File.Exists(path))
+        {
+            return AudioSettings.defaultSettings;
+        }
+
+        string json = "";
+        using (StreamReader sr = new StreamReader(path))
+        {
+            json = sr.ReadToEnd();
+        }
+
+        return JsonUtility.FromJson<AudioSettings>(json);
+
+    }
     public static IEnumerator LoadSceneAsync(int index, Button b)
     {
         //disable button

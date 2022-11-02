@@ -13,6 +13,9 @@ public class MainMenu : MonoBehaviour
     public GameObject settingsPanel;
     public GameObject highscoresPanel;
     [SerializeField] public RectTransform scores;
+    [Header("Sliders")]
+    public Slider bgSlider;
+    public Slider sfxSlider;
     [Header("UI Prefabs")]
     public GameObject highscoreEntryPrefab;
 
@@ -23,6 +26,12 @@ public class MainMenu : MonoBehaviour
         settings.onClick.AddListener(() => settingsPanel.SetActive(!settingsPanel.activeSelf));
         highscores.onClick.AddListener(() => ShowHighscores());
         startGame.onClick.AddListener(() => StartCoroutine(Util.LoadSceneAsync(1, startGame)));
+
+        bgSlider.value = Audio.Instance.bgMusicSource.volume;
+        sfxSlider.value = Audio.Instance.sfxSource.volume;
+
+        bgSlider.onValueChanged.AddListener(Audio.Instance.SetBGAudioVolume);
+        sfxSlider.onValueChanged.AddListener(Audio.Instance.SetSFXAudioVolume);
     }
 
     void ShowHighscores() 

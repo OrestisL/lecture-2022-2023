@@ -77,7 +77,7 @@ public class ThirdPersonMovement : MonoBehaviour
         Vector3 inputDirection = new Vector3(x, 0, z).normalized;
 
         anim.SetFloat("Speed", currentSpeed * inputDirection.magnitude);
-        anim.SetFloat("SpeedMult",currentSpeed * 2f);
+
         if (inputDirection.magnitude >= 0.1f)
         {
             isMoving = true;
