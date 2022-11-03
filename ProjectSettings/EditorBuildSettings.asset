@@ -11,4 +11,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/Test.unity
     guid: fbae2c65f7d41424a95638943222ba68
+  - enabled: 1
+    path: Assets/Scenes/Third Person.unity
+    guid: 2ed483142d3110b4b90e60569091a004
   m_configObjects: {}

@@ -25,7 +25,7 @@ public class MainMenu : MonoBehaviour
     {
         settings.onClick.AddListener(() => settingsPanel.SetActive(!settingsPanel.activeSelf));
         highscores.onClick.AddListener(() => ShowHighscores());
-        startGame.onClick.AddListener(() => StartCoroutine(Util.LoadSceneAsync(1, startGame)));
+        startGame.onClick.AddListener(() => StartCoroutine(Util.LoadSceneAsync(2, startGame)));
 
         bgSlider.value = Audio.Instance.bgMusicSource.volume;
         sfxSlider.value = Audio.Instance.sfxSource.volume;

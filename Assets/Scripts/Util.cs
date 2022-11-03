@@ -150,6 +150,42 @@ public class Util
         return JsonUtility.FromJson<AudioSettings>(json);
 
     }
+
+    public static T LoadFromJson<T>(string fileName) 
+    {
+        string path = Path.Combine(Application.persistentDataPath, fileName);
+        //check if file exists
+        if (!File.Exists(path))
+        {
+            return default(T);
+        }
+
+        string json = "";
+        using (StreamReader sr = new StreamReader(path))
+        {
+            json = sr.ReadToEnd();
+        }
+
+        return JsonUtility.FromJson<T>(json);
+    }
+
+    public static void SaveToJson<T>(T data, string fileName)
+    {
+        string path = Path.Combine(Application.persistentDataPath, fileName);
+        //check if file exists
+        if (!File.Exists(path))
+        {
+            File.Create(path).Close();
+        }
+
+        string json = JsonUtility.ToJson(data, true);
+
+        using (StreamWriter sw = new StreamWriter(path))
+        {
+            sw.Write(json);
+        }
+    }
+
     public static IEnumerator LoadSceneAsync(int index, Button b)
     {
         //disable button

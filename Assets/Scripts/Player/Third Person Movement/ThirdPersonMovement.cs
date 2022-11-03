@@ -38,33 +38,26 @@ public class ThirdPersonMovement : MonoBehaviour
         Jump();
     }
 
-    //private void OnControllerColliderHit(ControllerColliderHit hit)
-    //{
-    //    //tags
-    //    if (hit.gameObject.CompareTag("Moveable"))
-    //    {
-    //        Vector3 dir = hit.point - transform.position;
-        
-    //        Rigidbody otherBody = hit.gameObject.GetComponent<Rigidbody>();
-    //        if (otherBody == null)
-    //        {
-    //            //no rigibody attached, move transform
-    //            hit.transform.position = Vector3.MoveTowards(hit.transform.position, hit.transform.position + dir, Time.deltaTime);
-    //        }
-    //        else
-    //        {
-    //            //rigibody exists apply force
-    //            otherBody.AddForce(dir);
-    //        }
-    //    }
+    private void OnControllerColliderHit(ControllerColliderHit hit)
+    {
+        //tags
+        if (hit.gameObject.CompareTag("Moveable"))
+        {
+            Vector3 dir = hit.point - transform.position;
 
-    //    //layers
-    //    //layermask.compareto returns 0 if it hits the layers you want
-    //    if (hit.gameObject.layer.CompareTo(LayerMask.NameToLayer("Cube")) == 0)
-    //    {
-    //        Debug.Log("Layer hit");
-    //    }
-    //}
+            Rigidbody otherBody = hit.gameObject.GetComponent<Rigidbody>();
+            if (otherBody == null)
+            {
+                //no rigibody attached, move transform
+                hit.transform.position = Vector3.MoveTowards(hit.transform.position, hit.transform.position + dir, Time.deltaTime);
+            }
+            else
+            {
+                //rigibody exists apply force
+                otherBody.AddForce(dir * 10);
+            }
+        }
+    }
 
     private void Movement()
     {
@@ -96,6 +89,7 @@ public class ThirdPersonMovement : MonoBehaviour
             if (!canMove)
                 currentSpeed = 0;
 
+            isMoving = currentSpeed > 0 ? true : false;
             characterController.Move(moveDirection.normalized * currentSpeed * Time.deltaTime);
         }
         else
