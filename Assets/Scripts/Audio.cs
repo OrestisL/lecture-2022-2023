@@ -1,5 +1,6 @@
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using Utilities;
 
 public class Audio : GenericSingleton<Audio>
 {
@@ -15,7 +16,7 @@ public class Audio : GenericSingleton<Audio>
 
         sfxSource = gameObject.AddComponent<AudioSource>();
 
-        Util.AudioSettings loaded = Util.LoadSoundSettings();
+        Utilities.AudioSettings loaded = Util.LoadSoundSettings();
 
         bgMusicSource.volume = loaded.bgVolume;
         sfxSource.volume = loaded.sfxVolume;
@@ -44,7 +45,7 @@ public class Audio : GenericSingleton<Audio>
 
     private void OnApplicationQuit()
     {
-        Util.SaveSoundSettings(new Util.AudioSettings(bgMusicSource.volume, sfxSource.volume));
+        Util.SaveSoundSettings(new Utilities.AudioSettings(bgMusicSource.volume, sfxSource.volume));
     }
 }
 

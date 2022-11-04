@@ -2,6 +2,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using System.Collections.Generic;
 using System.Linq;
+using Utilities;
 
 public class MainMenu : MonoBehaviour
 {
@@ -47,7 +48,7 @@ public class MainMenu : MonoBehaviour
             return;
         }
 
-        List<Util.Highscore> list = Util.LoadHighscores();
+        List<Highscore> list = Util.LoadHighscores();
 
         if (list == null)
         {
